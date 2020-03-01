@@ -21,13 +21,9 @@ RUN \
     apt-get -y upgrade bazel
 
 ENTRYPOINT bash -c \
-    echo 'test --test_output=errors --action_env="GTEST_COLOR=1"\
-# Force bazel output to use colors (good for jenkins) and print useful errors. \
-common --color=yes \
-build --action_env CC=/usr/bin/gcc-7 --cxxopt="-std=c++14"' > .bazelrc && \
     bash install.sh && \
     bash -c "source dev_into.sh && \
     bazel build //... && \
     bazel test //... "
 
-
+#    printf 'test --test_output=errors --action_env="GTEST_COLOR=1" \n # Force bazel output to use colors (good for jenkins) and print useful errors. \n common --color=yes \n build --action_env CC=/usr/bin/gcc-7 --cxxopt="-std=c++14"\n' > .bazelrc && \
